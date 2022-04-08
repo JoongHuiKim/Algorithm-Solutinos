@@ -1,34 +1,20 @@
-def solution(index):
-    global sumVal
 
-    if index == N-1:
-        if data[index][0] == 1:
-            sumVal += data[index][1]
-            return True
-        else:
-            return True
+n = int(input())
+dp = []
+t = []
+p = []
+for i in range(n):
+    a, b = map(int, input().split())
+    t.append(a)
+    p.append(b)
 
-    temp_index = index + data[index][0]
-    if temp_index >= N:
-        return True
+dp = [0 for _ in range(n+1)]
+
+
+for i in range(n-1,-1,-1):
+    if i+t[i] > n:
+        dp[i] = dp[i+1]
     else:
-        sumVal += data[index][1]
-        solution(temp_index)
+        dp[i] = max(p[i]+dp[i+t[i]],dp[i+1])
 
-    return True
-
-
-N = int(input())
-sumVal = 0
-data = []
-val = []
-for i in range(N):
-    data.append(list(map(int,input().split())))
-
-
-for i in range(N):
-    sumVal = 0
-    solution(i)
-    val.append(sumVal)
-
-print(max(val))
+print(dp[0])
