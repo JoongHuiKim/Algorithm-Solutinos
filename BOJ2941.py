@@ -1,5 +1,4 @@
 def countAlphabet(word,N):
-    global counter
     if change_alphabet2 in word:
         word = word.replace(change_alphabet2,"1")
 
